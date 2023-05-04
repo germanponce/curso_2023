@@ -15,8 +15,9 @@ Este modulo agrega una seria de formularios para entender el desarrollo de la AP
     'depends': ['base'],
 
     'data': [
-
+            'views/course_view.xml',
     ],
+
     'demo': [
 
     ],
