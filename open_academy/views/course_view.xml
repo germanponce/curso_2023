@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="course_form">
+        <field name="name">open_academy.course.form</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <form string="Captura de Curso">
+                <header>
+                    
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="date_start" />
+                        <field name="date_end" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
