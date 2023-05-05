@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-   
-   <record model="open_academy.course" id="curso1">
-        <field name="name">Hola Mundo</field>
-        <field name="date_start">2023-05-01</field>
-        <field name="date_end">2023-05-05</field>
-    </record> 
+
+   <data noupdate="1">
+
+      <record model="open_academy.course" id="curso1">
+           <field name="name">Hola Mundo</field>
+           <field name="date_start">2023-05-01</field>
+           <field name="date_end">2023-05-05</field>
+           <field name="active">True</field>
+      </record> 
+
+    </data>
 
 </odoo>

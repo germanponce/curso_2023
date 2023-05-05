@@ -7,14 +7,31 @@
         <field name="arch" type="xml">
             <form string="Captura de Curso">
                 <header>
-                    
+                    <field name="state" widget="statusbar" statusbar_visible="draft,pending,open,in_process,done"/>
                 </header>
                 <sheet>
+
+                    <widget name="web_ribbon" 
+                        title="Archivado" bg_color="bg-danger" 
+                        attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+
                     <group>
-                        <field name="name" />
-                        <field name="date_start" />
-                        <field name="date_end" />
+                        <group>
+                            <field name="date_start" />
+                        </group>
+                        <group>
+                            <field name="date_end" attrs="{'required': [('date_start', '!=', False)]}"/>
+                            <field name="active" />
+
+                        </group>
                     </group>
+
                 </sheet>
             </form>
         </field>
@@ -29,6 +46,7 @@
                 <field name="name" />
                 <field name="date_start" />
                 <field name="date_end" />
+                <field name="active" />
 
             </tree>
         </field>

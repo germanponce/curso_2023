@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <data>
+        
       <menuitem 
                 id="menu_open_academy" 
                 name="Odoo Academy" 
@@ -21,5 +23,6 @@
                 action="course_window"
               />
 
+    </data>
 
 </odoo>
