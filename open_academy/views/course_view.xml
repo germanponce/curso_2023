@@ -20,4 +20,26 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="course_tree">
+        <field name="name">open_academy.course.tree</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Cursos">
+
+                <field name="name" />
+                <field name="date_start" />
+                <field name="date_end" />
+
+            </tree>
+        </field>
+    </record>
+
+
+  <record model="ir.actions.act_window" id="course_window">
+    <field name="name">Cursos</field>
+    <field name="res_model">open_academy.course</field>
+    <field name="view_mode">tree,form</field>
+  </record> 
+
+
 </odoo>

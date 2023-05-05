@@ -15,7 +15,14 @@ Este modulo agrega una seria de formularios para entender el desarrollo de la AP
     'depends': ['base'],
 
     'data': [
+                # Vistas #
                 'views/course_view.xml',
+                'views/menu.xml',
+                # Permisos de Acceso #
+                'security/ir.model.access.csv',
+                # Datos Demo #
+                'data/demo.xml',
+                'data/open_academy.course.csv',
             ],
 
     'demo': [

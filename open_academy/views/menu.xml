@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+      <menuitem 
+                id="menu_open_academy" 
+                name="Odoo Academy" 
+                web_icon="open_academy,static/description/icon.png"
+              />
+
+      <menuitem 
+                id="menu_courses" 
+                name="Cursos" 
+                parent="menu_open_academy"
+              />
+
+
+      <menuitem 
+                id="menu_courses_action" 
+                name="Curso" 
+                parent="menu_courses"
+                action="course_window"
+              />
+
+
+</odoo>
