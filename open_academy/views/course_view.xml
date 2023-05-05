@@ -48,6 +48,14 @@
                         </group>
                     </group>
 
+                    <group>
+                        <group>
+                            <field name="manager_id" />
+                        </group>
+                        <group>
+                            <field name="staff_id" />
+                        </group>
+                    </group>
 
                     <notebook>
                         <page string="Descripción">
@@ -81,6 +89,35 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="course_search">
+        <field name="name">open_academy.course.search</field>
+        <field name="model">open_academy.course</field>
+        <field name="arch" type="xml">
+            <search string="Filtrado de Cursos">
+                <field name="name" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="active" />
+                <field name="manager_id" />
+                <field name="staff_id" />
+                <filter string="Todos" name="all" domain="['|',('active','=',False),('active','=',True)]" />
+                <filter string="Archivado" name="archived" domain="[('active','=',False)]" />
+                <filter string="Borrador" name="draft" domain="[('state','=','draft')]" />
+                <filter string="Pendiente" name="pending" domain="[('state','=','pending')]" />
+                <filter string="Abierto" name="open" domain="[('state','=','open')]" />
+                <filter string="En proceso" name="in_process" domain="[('state','=','in_process')]" />
+                <filter string="Finalizado" name="done" domain="[('state','=','done')]" />
+                <filter string="Cancelado" name="cancel" domain="[('state','=','cancel')]" />
+                <group expand="1" string="Agrupar por....">
+                    <filter string="Archivado" name="group_active" context="{'group_by':'active'}" />
+                    <filter string="Estado" name="group_state" context="{'group_by':'state'}" />
+                    <filter string="Fecha Inicio" name="gp_date_start" context="{'group_by':'date_start'}" />
+                    <filter string="Fecha Fin" name="gp_date_end" context="{'group_by':'date_end'}" />
+                </group>
+
+            </search>
+        </field>
+    </record>
 
   <record model="ir.actions.act_window" id="course_window">
     <field name="name">Cursos</field>

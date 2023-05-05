@@ -8,7 +8,7 @@ class Course(models.Model):
     _name = 'open_academy.course'
     _description = 'Gestión de los Cursos Ofertados'
     _order = 'date_start'
-
+    
     state  = fields.Selection([
                                 ('draft','Borrador'),
                                 ('pending','Pendiente'),
@@ -36,11 +36,17 @@ class Course(models.Model):
                                     ('presential', 'Presencial'),
                                   ], 'Tipo de Curso')
 
-    photo = fields.Binary('Imagen')
+    #### Campo Related ####
+    photo = fields.Binary('Imagen', related="manager_id.image_1920")
 
     cost = fields.Float('Precio Unitario', digits=(14,2))
 
     #### Relacionales #####
+
+    manager_id = fields.Many2one('res.users', 'Impartido por')
+
+    staff_id = fields.Many2one('res.users', 'Asistente')
+
 
     # # Tipos # #
     #  Char
