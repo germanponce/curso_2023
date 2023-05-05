@@ -25,6 +25,22 @@ class Course(models.Model):
 
     active = fields.Boolean('Activo', default=True)
 
+    description = fields.Html('Información Curso')
+
+    notes = fields.Text('Notas')
+
+    duration = fields.Integer('Duración')
+
+    course_type = fields.Selection([
+                                    ('online','En linea'),
+                                    ('presential', 'Presencial'),
+                                  ], 'Tipo de Curso')
+
+    photo = fields.Binary('Imagen')
+
+    cost = fields.Float('Precio Unitario', digits=(14,2))
+
+    #### Relacionales #####
 
     # # Tipos # #
     #  Char

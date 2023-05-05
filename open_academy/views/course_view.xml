@@ -21,9 +21,25 @@
                         </h1>
                     </div>
 
+                    <field name="photo" widget="image" class="oe_avatar"/>
+
+                    <group>
+                        <field name="course_type" />
+                    </group>
+
+
                     <group>
                         <group>
                             <field name="date_start" />
+
+                            <label for="duration"/>
+                            <div class="o_row" name="duration">
+                                <field
+                                    name="duration"/>
+                                (dias)
+                            </div>
+
+                            <field name="cost" />
                         </group>
                         <group>
                             <field name="date_end" attrs="{'required': [('date_start', '!=', False)]}"/>
@@ -32,6 +48,19 @@
                         </group>
                     </group>
 
+
+                    <notebook>
+                        <page string="Descripción">
+                            <group>
+                                <field name="description" widget="html" class="oe-bordered-editor"/>
+                            </group>
+                        </page>
+
+                        <page string="Notas">
+                            <field name="notes" placeholder="Agrega tus notas...."/>
+                        </page>
+
+                    </notebook>
                 </sheet>
             </form>
         </field>
