@@ -3,12 +3,17 @@
 # Clases Base para Odoo
 
 from odoo import models, fields, api
+from random import randint
 
 class SessionTag(models.Model):
     _name = "open_academy.session.tag"
     _description = 'Etiquetas de Sesiones'
 
+    def _get_default_color(self):
+        return randint(1, 11)
+
     name = fields.Char('Nombre', size=64)
+    color = fields.Integer('Color', default=_get_default_color)
 
 class Session(models.Model):
     _name = "open_academy.session"
@@ -30,6 +35,11 @@ class Session(models.Model):
     tag_ids = fields.Many2many('open_academy.session.tag', 
                                      'sessions_tags_rel', 'session_id', 'tag_id',
                                      'Etiquetas')
+
+    color = fields.Integer('Color')
+
+    course_id = fields.Many2one('open_academy.course', 'Curso/ID Ref',
+                                help="Asocia la clase al curso...")
 
     #### Query Consulta de Union de Tablas ####
     """ 

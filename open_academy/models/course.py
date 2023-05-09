@@ -84,6 +84,7 @@ class Course(models.Model):
 
     staff_id = fields.Many2one('res.users', 'Asistente')
 
+    session_ids = fields.One2many('open_academy.session', 'course_id', 'Clases')
 
     # # Tipos # #
     #  Char

@@ -17,37 +17,38 @@
 
                     <div class="oe_title">
                         <h1>
-                            <field name="name" />
+                            <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
                         </h1>
                     </div>
 
                     <field name="photo" widget="image" class="oe_avatar"/>
 
                     <group>
-                        <field name="course_type" />
+                        <field name="course_type" attrs="{'readonly':[('state','!=','draft')]}"/>
                     </group>
 
 
                     <group>
                         <group>
-                            <field name="date_start" />
+                            <field name="date_start" attrs="{'readonly':[('state','!=','draft')]}"/>
 
                             <label for="duration"/>
                             <div class="o_row" name="duration">
                                 <field
-                                    name="duration"/>
+                                    name="duration" attrs="{'readonly':[('state','!=','draft')]}"/>
                                 (dias)
                             </div>
 
                             <label for="cost"/>
                             <div class="o_row" name="cost">
                                 <field
-                                    name="cost"/>
-                                <field name="currency_id" />
+                                    name="cost" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="currency_id" attrs="{'readonly':[('state','!=','draft')]}"/>
                             </div>                            
                         </group>
                         <group>
-                            <field name="date_end" attrs="{'required': [('date_start', '!=', False)]}"/>
+                            <field name="date_end" attrs="{'required': [('date_start', '!=', False)],
+                                                           'readonly': [('state','!=','draft')]}"/>
                             <field name="active" />
 
                         </group>
@@ -55,15 +56,28 @@
 
                     <group>
                         <group>
-                            <field name="manager_id" />
+                            <field name="manager_id" attrs="{'readonly':[('state','!=','draft')]}"/>
                         </group>
                         <group>
-                            <field name="staff_id" />
-                            <field name="company_id" />
+                            <field name="staff_id" attrs="{'readonly':[('state','!=','draft')],
+                                                           'invisible':[('manager_id','=',False)],
+                                                           'required':[('manager_id','!=',False)]}"/>
+                            <field name="company_id" attrs="{'readonly':[('state','!=','draft')]}"/>
                         </group>
                     </group>
 
                     <notebook>
+                        <page string="Sesiones">
+                            <field name="session_ids" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree string="Clases" editable="bottom" >
+                                    <field name="name" required="1"/>
+                                    <field name="instructor_id" required="1" />
+                                    <field name="initial_date" required="1"/>
+                                    <field name="end_date" required="1"/>
+                                    <field name="number_of_seats" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
                         <page string="Descripción">
                             <group>
                                 <field name="description" widget="html" class="oe-bordered-editor"/>

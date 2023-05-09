@@ -35,8 +35,17 @@
       <menuitem 
                 id="menu_sessions_action" 
                 name="Sesiones/Lecciones" 
-                parent="menu_sessions"
+                parent="menu_sessions" 
+                sequence="1" 
                 action="session_window"
+              />
+
+      <menuitem 
+                id="menu_sessions_tags_action" 
+                name="Etiquetas" 
+                parent="menu_sessions" 
+                sequence="10" 
+                action="session_tags_window"
               />
 
     </data>
