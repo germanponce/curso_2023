@@ -12,11 +12,12 @@
 Este modulo agrega una seria de formularios para entender el desarrollo de la API de Odoo V15
 
     """,
-    'depends': ['base'],
+    'depends': ['base','contacts'],
 
     'data': [
                 # Vistas #
                 'views/course_view.xml',
+                'views/sessions_view.xml',
                 'views/menu.xml',
                 # Permisos de Acceso #
                 'security/ir.model.access.csv',

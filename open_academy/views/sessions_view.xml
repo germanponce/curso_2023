@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	    <record model="ir.ui.view" id="session_form">
+        <field name="name">open_academy.session.form</field>
+        <field name="model">open_academy.session</field>
+        <field name="arch" type="xml">
+            <form string="Captura de Sesion">
+                <header>
+                  
+                </header>
+                <sheet>
+                	<group>
+                		<field name="name" />
+                	</group>
+
+                	<group>
+                		<group>
+                			<field name="initial_date" />
+                			<field name="number_of_seats" />
+                		</group>
+                		<group>
+                			<field name="end_date" attrs="{'required':[('initial_date', '!=', False)]}"/>
+                			<field name="instructor_id" option="{'no_create':True,
+                				                                 'no_create_edit':True}"/>
+                		</group>
+                	</group>
+
+                	<group>
+                		<field name="tag_ids" widget="many2many_tags"/>
+                	</group>
+                	
+                	<group string="Asistentes">
+                		<field name="attendace_ids" nolabel="1" />
+                	</group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="session_tree">
+        <field name="name">open_academy.session.tree</field>
+        <field name="model">open_academy.session</field>
+        <field name="arch" type="xml">
+            <tree string="Sesiones">
+                <field name="name" />
+                <field name="number_of_seats" />
+                <field name="instructor_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="session_search">
+        <field name="name">open_academy.session.search</field>
+        <field name="model">open_academy.session</field>
+        <field name="arch" type="xml">
+            <search string="Filtrado de Sesiones">
+                <field name="name" />
+                <field name="instructor_id" />
+            </search>
+        </field>
+    </record>
+
+  <record model="ir.actions.act_window" id="session_window">
+    <field name="name">Sesiones</field>
+    <field name="res_model">open_academy.session</field>
+    <field name="view_mode">tree,form</field>
+  </record> 
+
+
+</odoo>

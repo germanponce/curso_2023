@@ -39,7 +39,12 @@
                                 (dias)
                             </div>
 
-                            <field name="cost" />
+                            <label for="cost"/>
+                            <div class="o_row" name="cost">
+                                <field
+                                    name="cost"/>
+                                <field name="currency_id" />
+                            </div>                            
                         </group>
                         <group>
                             <field name="date_end" attrs="{'required': [('date_start', '!=', False)]}"/>
@@ -54,6 +59,7 @@
                         </group>
                         <group>
                             <field name="staff_id" />
+                            <field name="company_id" />
                         </group>
                     </group>
 
