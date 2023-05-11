@@ -30,6 +30,15 @@ class Session(models.Model):
             print ("#### number_of_seats_free: ", number_of_seats_free)
             rec.number_of_seats_free = number_of_seats_free
 
+    @api.depends('number_of_seats', 'attendace_ids')
+    def _get_taken_seats_percent(self):
+        for rec in self:
+            number_of_attendances = len(rec.attendace_ids)
+            number_of_seats = rec.number_of_seats
+
+            number_of_seats_percent = 100 * (number_of_attendances / number_of_seats)
+            rec.number_of_seats_percent = number_of_seats_percent
+
     name = fields.Char('Descripción', size=128, required=True)
     initial_date = fields.Datetime('Fecha Inicio', default=_current_datetime)
     end_date = fields.Datetime('Fecha Fin')
@@ -51,6 +60,10 @@ class Session(models.Model):
 
     number_of_seats_free = fields.Integer('# Lugares Disponibles', compute="_get_takens_free")
 
+    number_of_seats_percent = fields.Float('Cupo lleno al', digits=(3,2), compute="_get_taken_seats_percent")
+
+    maximum_rate = fields.Integer('Rate Max.', default=100.0)
+
     #### Query Consulta de Union de Tablas ####
     """ 
         select oas.name, rp.name nombre_sesion from open_academy_session as oas
@@ -59,7 +72,6 @@ class Session(models.Model):
                                    join res_partner as rp
                                      on rp.id = sar.partner_id
     """
-
 
     @api.onchange('number_of_seats', 'attendace_ids')
     def onchange_number_of_seats(self):
