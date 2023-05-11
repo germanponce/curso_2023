@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="res_partner_academy_form">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <notebook position="inside">
+                <page string="Cursos/Sesiones">
+                    <group>
+                        <field name="is_student" />
+                    </group>
+                    <field name="session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}"/>
+                </page>
+            </notebook>
+
+            <!-- <xpath expr="//field[@name='category_id']" position="after">
+                <field name="session_ids" widget="many2many_tags"/>
+            </xpath> -->
+
+            <!-- <xpath expr="//page/field[@name='order_line']/tree/field[@name='product_id']" position="after">
+            </xpath> -->
+
+            <!-- <field name="category_id" position="after">
+                <field name="session_ids" widget="many2many_tags"/>
+
+                after
+                before
+                replace
+                attributes
+
+            </field> -->
+
+            <!-- <group name="container_row_2" position="inside">
+                <field name="session_ids" widget="many2many_tags"/>
+                 
+                Grupos
+                Notebook
+                
+                Agregamos:
+                inside 
+                after
+                before
+                replace
+                attributes
+                
+            </group> -->
+
+        </field>
+    </record>
+
+      <record model="ir.actions.act_window" id="partner_students_act">
+        <field name="name">Estudiantes</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_student','=',True)]</field>
+      </record> 
+
+</odoo>

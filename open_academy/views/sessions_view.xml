@@ -34,7 +34,7 @@
                     </group>
 
                     <group string="Asistentes">
-                        <field name="attendace_ids" nolabel="1" />
+                        <field name="attendace_ids" nolabel="1" domain="[('is_student','=',True)]"/>
                     </group>
                 </sheet>
             </form>

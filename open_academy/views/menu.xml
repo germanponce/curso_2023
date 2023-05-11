@@ -48,6 +48,23 @@
                 action="session_tags_window"
               />
 
+      <!-- Contactos -->
+
+      <menuitem 
+                id="menu_contacts" 
+                name="Contactos/Personas" 
+                parent="menu_open_academy"
+              />
+
+      <menuitem 
+                id="menu_partners_students_action" 
+                name="Estudiantes/Asistentes" 
+                parent="menu_contacts" 
+                sequence="1" 
+                action="partner_students_act"
+              />
+
+
     </data>
 
 </odoo>
