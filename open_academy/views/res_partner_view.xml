@@ -16,6 +16,18 @@
                 </page>
             </notebook>
 
+            <field name="mobile" position="replace">
+                <field name="mobile" widget="phone" required="1"/>
+            </field>
+
+            <field name="phone" position="attributes">
+                <attribute name="required">1</attribute>
+            </field>
+
+            <field name="email" position="attributes">
+                <attribute name="attrs">{'required':[('company_type','=','company')]}</attribute>
+            </field>
+
             <!-- <xpath expr="//field[@name='category_id']" position="after">
                 <field name="session_ids" widget="many2many_tags"/>
             </xpath> -->

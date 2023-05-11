@@ -17,6 +17,7 @@
                         <group>
                             <field name="initial_date" />
                             <field name="number_of_seats" />
+                            <field name="number_of_seats_free" />
                             <field name="color" invisible="1"/>
                         </group>
                         <group>
@@ -49,6 +50,7 @@
                 <field name="name" />
                 <field name="number_of_seats" />
                 <field name="instructor_id" />
+                <field name="number_of_seats_free" />
             </tree>
         </field>
     </record>
