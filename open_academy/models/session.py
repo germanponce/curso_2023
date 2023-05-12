@@ -35,9 +35,13 @@ class Session(models.Model):
         for rec in self:
             number_of_attendances = len(rec.attendace_ids)
             number_of_seats = rec.number_of_seats
-
-            number_of_seats_percent = 100 * (number_of_attendances / number_of_seats)
+            number_of_seats_percent = 0.0
+            number_of_seats_disponibility = 100
+            if number_of_attendances and number_of_seats:
+                number_of_seats_percent = 100 * (number_of_attendances / number_of_seats)
+                number_of_seats_disponibility = 100 - number_of_seats_percent
             rec.number_of_seats_percent = number_of_seats_percent
+            rec.number_of_seats_disponibility = number_of_seats_disponibility
 
     name = fields.Char('Descripción', size=128, required=True)
     initial_date = fields.Datetime('Fecha Inicio', default=_current_datetime)
@@ -62,7 +66,9 @@ class Session(models.Model):
 
     number_of_seats_percent = fields.Float('Cupo lleno al', digits=(3,2), compute="_get_taken_seats_percent")
 
-    maximum_rate = fields.Integer('Rate Max.', default=100.0)
+    number_of_seats_disponibility = fields.Float('Disponibilidad', digits=(3,2), compute="_get_taken_seats_percent")
+
+    maximum_rate = fields.Integer('Rate Max.', default=100)
 
     #### Query Consulta de Union de Tablas ####
     """ 

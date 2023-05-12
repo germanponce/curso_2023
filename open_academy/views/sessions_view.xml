@@ -9,12 +9,10 @@
                   
                 </header>
                 <sheet>
-                    <group class="oe_right">
-                        <field name="number_of_seats_percent" widget="gauge" 
-                            nolabel="1" />
+                    <field name="maximum_rate" invisible="1" />
+                        <field name="number_of_seats_percent" widget="gauge" class="oe_right" 
+                            />
 
-                    </group>
-                    
                     <group>
                         <field name="name" />
                     </group>
@@ -71,6 +69,40 @@
             </search>
         </field>
     </record>
+
+<!--   <record model="ir.ui.view" id="session_kanban">
+    <field name="name">Kanban Session</field>
+    <field name="model">open_academy.session</field>
+    <field name="arch" type="xml">
+
+      <kanban default_group_by="course_id" >
+        <templates>
+            <field name="maximum_rate" />
+            <field name="number_of_seats_percent" />
+            <field name="number_of_seats_disponibility" />
+          <t t-name="kanban-box">
+            <div>
+              <div>
+                <strong><field name="name"/></strong>
+                <div>
+                  <field name="instructor_id"/>
+                </div>
+                <div>
+                  <field name="initial_date" widget="date"/>
+                </div>
+              </div>
+                  
+                  <field name="number_of_seats_disponibility" widget="gauge" 
+                    style="width:120px;height:90px;cursor:pointer;" 
+                    options="{'max_field': 'maximum_rate'}" />
+
+            </div>
+          </t>
+        </templates>
+      </kanban>
+
+    </field>
+  </record> -->
 
   <record model="ir.actions.act_window" id="session_window">
     <field name="name">Sesiones</field>
