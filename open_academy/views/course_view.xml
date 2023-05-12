@@ -7,6 +7,18 @@
         <field name="arch" type="xml">
             <form string="Captura de Curso">
                 <header>
+                    <button name="action_draft" string="Borrador" type="object" states="cancel" icon="fa-bug"
+                        />
+                    <button name="action_pending" string="Pendiente de iniciar" type="object" states="draft" icon="fa-cogs"
+                        />
+                    <button name="action_open" string="Abierto" type="object" states="draft,pending" icon="fa-cloud-upload"/>
+                    <button name="action_in_process" string="En proceso de solicitudes" type="object" 
+                        states="draft,pending,open" icon="fa-cogs"/>
+                    <button name="action_done" string="Cerrado" type="object" states="in_process" icon="fa-check-circle-o"
+                        />
+                    <button name="action_cancel" string="Cancelar" type="object" states="draft,pending,open,in_process" icon="fa-close"
+                        />
+
                     <field name="state" widget="statusbar" statusbar_visible="draft,pending,open,in_process,done"/>
                 </header>
                 <sheet>
@@ -14,6 +26,11 @@
                     <widget name="web_ribbon" 
                         title="Archivado" bg_color="bg-danger" 
                         attrs="{'invisible': [('active', '=', True)]}"/>
+
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_sessions" type="object" class="oe_stat_button" icon="fa-pencil-square-o" string="Cursos">
+                        </button>
+                    </div>
 
                     <div class="oe_title">
                         <h1>

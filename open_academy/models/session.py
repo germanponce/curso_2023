@@ -71,6 +71,9 @@ class Session(models.Model):
 
     maximum_rate = fields.Integer('Rate Max.', default=100)
 
+    no_copia = fields.Integer('No. de copia', copy=False)
+
+    folio = fields.Char('Folio', size=64)
     #### Query Consulta de Union de Tablas ####
     """ 
         select oas.name, rp.name nombre_sesion from open_academy_session as oas
@@ -106,3 +109,27 @@ Asientos Faltantes: %s" % abs(number_of_seats_free),
 
     # def search(self):
 
+
+    #### herencia de funciones #####
+    @api.model
+    def create(self, vals):
+        print ("### CREATE >>>>>>> ")
+        print ("### vals ", vals)
+        ### codigo antes ###
+        ### self.env[''] -> Llamada a un modelo
+        vals['folio'] = self.env['ir.sequence'].next_by_code('open_academy.session') or 'Nuevo'
+
+        res = super(Session, self).create(vals)
+        print ("### res ", res)
+        ### codigo despues ####
+        return res
+
+
+    def copy(self):
+        ### codigo antes ###
+        self.no_copia = self.no_copia + 1
+        print ("### self.no_copia", self.no_copia)
+        print ("### self.name", self.name)
+        res = super().copy({'name':self.name+" (copia %s)" % self.no_copia})
+        ### codigo despues ####
+        return res

@@ -3,6 +3,8 @@
 # Clases Base para Odoo
 
 from odoo import models, fields, api
+from odoo.exceptions import AccessError, UserError, ValidationError
+
 
 class Course(models.Model):
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
@@ -91,6 +93,20 @@ class Course(models.Model):
 
     folio = fields.Char('Folio', size=64)
 
+    ##### Restricciones de Odoo #####
+    
+    _sql_constraints = [
+        ('name_unique', 'UNIQUE(name)', "El nombre del curso debe ser unico"),
+            ]
+
+    @api.constrains('date_start','date_end')
+    def _constraint_check_dates(self):
+        for rec in self:
+            if rec.date_end < rec.date_start:
+                raise UserError("La fecha fin no puede ser mayor a la fecha de inicio.")
+        return True
+    
+
     # # Tipos # #
     #  Char
     #  Float
@@ -115,14 +131,11 @@ class Course(models.Model):
     #### herencia de funciones #####
     @api.model
     def create(self, vals):
-        print ("### CREATE >>>>>>> ")
-        print ("### vals ", vals)
         ### codigo antes ###
         ### self.env[''] -> Llamada a un modelo
         vals['folio'] = self.env['ir.sequence'].next_by_code('open_academy.course') or 'Nuevo'
 
         res = super(Course, self).create(vals)
-        print ("### res ", res)
         ### codigo despues ####
         return res
 
@@ -130,8 +143,53 @@ class Course(models.Model):
     def copy(self):
         ### codigo antes ###
         self.no_copia = self.no_copia + 1
-        print ("### self.no_copia", self.no_copia)
-        print ("### self.name", self.name)
         res = super().copy({'name':self.name+" (copia %s)" % self.no_copia})
         ### codigo despues ####
         return res
+
+    def action_draft(self):
+        self.state = 'draft'
+        return True
+
+    def action_pending(self):
+        self.state = 'pending'
+        return True
+
+    def action_open(self):
+        self.state = 'open'
+        return True
+
+    def action_in_process(self):
+        self.state = 'in_process'
+        return True
+
+    def action_done(self):
+        self.state = 'done'
+        return True
+
+    def action_cancel(self):
+        self.state = 'cancel'
+        body_html = "<h1>El registro <strong style='color:red'>%s</strong> fue cancelado.</h1>" % self.folio
+        self.message_post(body=body_html)
+        return True
+
+    def action_view_sessions(self):
+        # session_ids = []
+        # for x in self.session_ids:
+        #     session_ids.append(x.id)
+
+        if not self.session_ids:
+            raise ValidationError("No se tienen cursos registrados.")
+
+        if self.session_ids:
+            session_ids = [x.id for x in self.session_ids]
+
+        return {
+                    'domain': [('id', 'in', session_ids)],
+                    'name': 'Sesiones del Curso %s' % self.folio,
+                    'view_mode': 'tree,form',
+                    'view_type': 'form',
+                    'context': {'tree_view_ref': 'open_academy.session_tree'},
+                    'res_model': 'open_academy.session',
+                    'type': 'ir.actions.act_window'
+                }

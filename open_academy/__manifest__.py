@@ -25,8 +25,8 @@ Este modulo agrega una seria de formularios para entender el desarrollo de la AP
                 # Permisos de Acceso #
                 'security/ir.model.access.csv',
                 # Datos Demo #
-                # 'data/demo.xml',
-                # 'data/open_academy.course.csv',
+                'data/demo.xml',
+                'data/open_academy.course.csv',
             ],
 
     'demo': [
