@@ -16,6 +16,7 @@ class SessionTag(models.Model):
     color = fields.Integer('Color', default=_get_default_color)
 
 class Session(models.Model):
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
     _name = "open_academy.session"
     _description = 'Sesiones del Curso'
     
@@ -60,7 +61,7 @@ class Session(models.Model):
     color = fields.Integer('Color')
 
     course_id = fields.Many2one('open_academy.course', 'Curso/ID Ref',
-                                help="Asocia la clase al curso...")
+                                help="Asocia la clase al curso...", ondelete="cascade")
 
     number_of_seats_free = fields.Integer('# Lugares Disponibles', compute="_get_takens_free")
 
@@ -97,4 +98,11 @@ El no. de lugares se ha actualizado para cubrir el no. de asientos necesarios.\n
 Asientos Faltantes: %s" % abs(number_of_seats_free),
                             },
                         }
-    
+    # def write(self, vals):
+
+    # def create(self, vals):
+
+    # def unlink(self):
+
+    # def search(self):
+

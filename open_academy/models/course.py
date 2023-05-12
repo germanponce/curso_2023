@@ -5,6 +5,7 @@
 from odoo import models, fields, api
 
 class Course(models.Model):
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin', 'utm.mixin']
     _name = 'open_academy.course'
     _description = 'Gestión de los Cursos Ofertados'
     _order = 'date_start'
@@ -55,10 +56,10 @@ class Course(models.Model):
                                 ('cancel', 'Cancelado'),
                               ], string="Estado", default="draft")
 
-    name = fields.Char('Nombre', size=128, required=True, index=True)
+    name = fields.Char('Nombre', size=128, required=True, index=True, tracking=1)
 
-    date_start = fields.Date('Fecha Inicio')
-    date_end = fields.Date('Fecha Fin')
+    date_start = fields.Date('Fecha Inicio', tracking=2)
+    date_end = fields.Date('Fecha Fin', tracking=3)
 
     active = fields.Boolean('Activo', default=True)
 
@@ -76,7 +77,7 @@ class Course(models.Model):
     #### Campo Related ####
     photo = fields.Binary('Imagen', related="manager_id.image_1920")
 
-    cost = fields.Monetary('Precio Unitario', digits=(14,2))
+    cost = fields.Monetary('Precio Unitario', tracking=1)
 
     #### Relacionales #####
 
@@ -85,6 +86,10 @@ class Course(models.Model):
     staff_id = fields.Many2one('res.users', 'Asistente')
 
     session_ids = fields.One2many('open_academy.session', 'course_id', 'Clases')
+
+    no_copia = fields.Integer('No. de copia', copy=False)
+
+    folio = fields.Char('Folio', size=64)
 
     # # Tipos # #
     #  Char
@@ -106,3 +111,27 @@ class Course(models.Model):
     # # Calculados
     #  Function
 
+
+    #### herencia de funciones #####
+    @api.model
+    def create(self, vals):
+        print ("### CREATE >>>>>>> ")
+        print ("### vals ", vals)
+        ### codigo antes ###
+        ### self.env[''] -> Llamada a un modelo
+        vals['folio'] = self.env['ir.sequence'].next_by_code('open_academy.course') or 'Nuevo'
+
+        res = super(Course, self).create(vals)
+        print ("### res ", res)
+        ### codigo despues ####
+        return res
+
+
+    def copy(self):
+        ### codigo antes ###
+        self.no_copia = self.no_copia + 1
+        print ("### self.no_copia", self.no_copia)
+        print ("### self.name", self.name)
+        res = super().copy({'name':self.name+" (copia %s)" % self.no_copia})
+        ### codigo despues ####
+        return res

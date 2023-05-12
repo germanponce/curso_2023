@@ -15,7 +15,18 @@
                     </group>
                     <field name="session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}" attrs="{'invisible':[('is_instructor','=',True)]}"/>
 
-                    <field name="instructor_session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}" attrs="{'invisible':[('is_instructor','=',False)]}" readonly="1"/>
+                    <field name="instructor_session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}" attrs="{'invisible':[('is_instructor','=',False)]}" readonly="1">
+                        <tree string="Sesiones Asignadas">
+                            <field name="id" optional="hide"/>
+                            <field name="name" />
+                            <field name="initial_date" optional="show"/>
+                            <field name="end_date" optional="show"/>
+                            <field name="number_of_seats" optional="show"/>
+                            <field name="number_of_seats_free" optional="show"/>
+                            <field name="tag_ids" widget="many2many_tags" optional="show"/>
+                            <field name="course_id" />
+                        </tree>
+                    </field>
                 </page>
             </notebook>
 
