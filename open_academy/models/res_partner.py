@@ -20,3 +20,6 @@ class ResPartner(models.Model):
 
     is_student = fields.Boolean('Es un estudiante', compute="_is_an_student", store=True)
 
+    is_instructor = fields.Boolean('Es un Instructor')
+
+    instructor_session_ids = fields.One2many('open_academy.session', 'instructor_id', 'Sesiones')

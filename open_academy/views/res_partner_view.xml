@@ -10,9 +10,12 @@
             <notebook position="inside">
                 <page string="Cursos/Sesiones">
                     <group>
-                        <field name="is_student" />
+                        <field name="is_student" attrs="{'invisible':[('is_instructor','=',True)]}"/>
+                        <field name="is_instructor" />
                     </group>
-                    <field name="session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}"/>
+                    <field name="session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}" attrs="{'invisible':[('is_instructor','=',True)]}"/>
+
+                    <field name="instructor_session_ids" options="{'no_create': True, 'no_create_edit': True, 'no_edit': True, 'no_open': True}" attrs="{'invisible':[('is_instructor','=',False)]}" readonly="1"/>
                 </page>
             </notebook>
 
@@ -70,4 +73,10 @@
         <field name="domain">[('is_student','=',True)]</field>
       </record> 
 
+      <record model="ir.actions.act_window" id="partner_instructors_act">
+        <field name="name">Instructores/Maestros</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_instructor','=',True)]</field>
+      </record> 
 </odoo>

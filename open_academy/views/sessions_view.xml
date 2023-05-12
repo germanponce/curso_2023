@@ -27,7 +27,7 @@
                         <group>
                             <field name="end_date" attrs="{'required':[('initial_date', '!=', False)]}"/>
                             <field name="instructor_id" option="{'no_create':True,
-                                                                 'no_create_edit':True}"/>
+                                                                 'no_create_edit':True}" domain="[('is_instructor','=',True)]"/>
                             <field name="course_id" option="{'no_create':True,
                                                                  'no_create_edit':True}" 
                                                     string="Curso" readonly="1"/>
