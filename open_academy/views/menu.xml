@@ -21,7 +21,17 @@
                 id="menu_courses_action" 
                 name="Curso" 
                 parent="menu_courses"
-                action="course_window"
+                action="course_window" 
+                sequence="1"
+
+              />
+
+      <menuitem 
+                id="menu_courses_action_calendar" 
+                name="Calendario" 
+                parent="menu_courses"
+                action="course_calendar_window" 
+                sequence="2"
               />
 
       <!-- Menu Sesiones -->

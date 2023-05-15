@@ -44,6 +44,16 @@ class Course(models.Model):
 
         return False
 
+
+    def _get_compute_kanban(self):
+        for rec in self:
+            if not rec.manager_id and not rec.staff_id:
+                rec.label_kaban = "Curso no disponible"
+            else:
+                rec.label_kaban = ""
+
+    label_kaban = fields.Char('Etiqueta Kanban', compute="_get_compute_kanban")
+
     currency_id = fields.Many2one('res.currency', string="Moneda", default=_get_currency_company)
 
     company_id = fields.Many2one('res.company', string='Compañia', readonly=True, 
