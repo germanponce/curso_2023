@@ -27,6 +27,8 @@ Este modulo agrega una seria de formularios para entender el desarrollo de la AP
                 # Datos Demo #
                 'data/demo.xml',
                 'data/open_academy.course.csv',
+                # Reportes #
+                'reports/sessions_report.xml',
             ],
 
     'demo': [

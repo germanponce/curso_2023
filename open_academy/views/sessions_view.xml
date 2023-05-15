@@ -59,11 +59,12 @@
         <field name="name">open_academy.session.tree</field>
         <field name="model">open_academy.session</field>
         <field name="arch" type="xml">
-            <tree string="Sesiones">
+            <tree string="Sesiones" decoration-danger="number_of_seats_percent&gt;=70" decoration-success="number_of_seats_percent&lt;=50">
                 <field name="name" />
                 <field name="number_of_seats" />
                 <field name="instructor_id" />
                 <field name="number_of_seats_free" />
+                <field name="number_of_seats_percent" />
             </tree>
         </field>
     </record>
